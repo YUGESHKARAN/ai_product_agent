@@ -1,0 +1,14 @@
+pymongo[srv]
+
+langchain
+langchain_community
+langchain_core
+langsmith
+python-dotenv
+pymongo
+flask
+flask-cors
+
+langchain_groq
+boto3
+serpapi

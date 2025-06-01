@@ -41,8 +41,8 @@ def search_and_download_image(query):
     filename = f"{quote_plus(query)}.jpg"
     filepath = os.path.join(SAVE_DIR, filename)
 
-    # with open(filepath, "wb") as f:
-    #     f.write(img_data)
+    with open(filepath, "wb") as f:
+        f.write(img_data)
 
     s3.upload_file(filepath, BUCKET_NAME, filename)
 

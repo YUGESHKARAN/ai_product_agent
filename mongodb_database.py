@@ -56,6 +56,7 @@
 
 #         except Exception as e:
 #             return [{"error": str(e)}]
+
 from pymongo import MongoClient
 from bson import ObjectId
 from datetime import datetime
@@ -108,8 +109,12 @@ class MongoDBDatabase:
                             return [{"error": f"Invalid date format for waranty: {product['waranty']}"}]
 
                     # Search and assign image if missing or a prompt string
-                    if "product" in product and (not product.get("image") or isinstance(product["image"], str)):
-                        image_name = search_and_download_image(product["image"] or product["product"])
+                    # if "product" in product and (not product.get("image") or isinstance(product["image"], str)):
+                    #     image_name = search_and_download_image(product["image"] or product["product"])
+                    #     product["image"] = image_name
+                    # Search and assign image only if image key is missing or empty
+                    if "product" in product:
+                        image_name = search_and_download_image(product["product"])
                         product["image"] = image_name
 
                 # Handle $set (updating productDetails)
@@ -117,11 +122,10 @@ class MongoDBDatabase:
                     set_doc = update_doc["$set"]
                     for key, value in set_doc.items():
                         # Match keys like 'productDetails.$.image'
-                        if key.startswith("productDetails") and key.endswith(".image") and isinstance(value, str):
-                            image_prompt = value.strip()
-                            if image_prompt:
-                                image_name = search_and_download_image(image_prompt)
-                                update_doc["$set"][key] = image_name
+                        if key.startswith("productDetails") and key.endswith(".image"):
+                            image_prompt = value
+                            image_name = search_and_download_image(image_prompt)
+                            update_doc["$set"][key] = image_name
 
                 result = collection.update_one(filter_doc, update_doc)
                 return [{"matched_count": result.matched_count, "modified_count": result.modified_count}]

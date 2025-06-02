@@ -43,6 +43,8 @@ def mogodb_query_generator(db):
 
     Write only the MongoDB query and nothing else. Do not wrap the query in any other text, not even backticks.
 
+    Gerneral example:
+
     For example:
     Question: Show all the products ?
     MongoDB Query: collection.find({{"email": {email}}}, {{"productDetails": 1, "_id": 0}})
@@ -56,7 +58,7 @@ def mogodb_query_generator(db):
     Question: Change the price of the product Laptop?
     MongoDB Query: collection.updateOne({{"email": {email}, "productDetails.product": "Laptop"}}, {{"$set": {{"productDetails.$.price": <new_price>}}}})
 
-    Question: Add new product with product name SSD, price 10000, waranty 2027 03 10
+    Question: Add new product with product name SSD, price 10000, warranty March 10, 2027
     MongoDB Query: collection.updateOne({{"email": {email}}}, {{"$push": {{"productDetails": {{ "product": "SSD", "price": 10000, "waranty": "2027-03-10"}}}}}})
 
     Question: Delete the product 'Smart Watch'
@@ -102,11 +104,15 @@ def mogodb_query_generator(db):
     - Follow all the above instruction and look the example Question and MongoDB Query before performing actions.
     - Make sure to do update operation or insert operation only on productDetails field.
     - Do not use any other field except productDetails and email.
+    - For insert operation image will be added in backend, do not get the image from the user for adding new product.
+
+
+
 
 
     Your turn:
     Question: {question}
-    MongoDB Query:
+    MongoDB Query: 
     """
 
     prompt = ChatPromptTemplate.from_template(template).partial(email="{email}")
@@ -132,6 +138,9 @@ def response_generator(user_query: str, db: MongoDBDatabase,email: str, chat_his
     note:
     1. Generate the content as per the conversation history and MongoDB response.
     2. Make sure to format the response as paragraph.
+    3. Make sure to avoid including document query structure in the response format, including errors. 
+    4. Try to as pre-size by avoiding adding other stuffs like document query structure.
+    5. Do not genearte the response more than 40 words.
 
     <SCHEMA>{schema}</SCHEMA>
 

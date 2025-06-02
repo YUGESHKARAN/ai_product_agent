@@ -24,7 +24,9 @@ def search_and_download_image(query):
     print(f"Extracting product name from query and searching image: {query}")
     
     # Use only product name for image search
-    product_name = query.strip().split("product name")[-1].split(",")[0].strip(" '")
+     # Use only product name for image search
+    raw_product_name = query.strip().split("product name")[-1].split(",")[0].strip(" '")
+    product_name = raw_product_name.replace(" ", "").lower()  # remove spaces and lowercase
 
     params = {
         "q": product_name,

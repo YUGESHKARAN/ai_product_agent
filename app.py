@@ -56,7 +56,7 @@ def mogodb_query_generator(db):
     Question: Change the price of the product Laptop?
     MongoDB Query: collection.updateOne({{"email": {email}, "productDetails.product": "Laptop"}}, {{"$set": {{"productDetails.$.price": <new_price>}}}})
 
-    Question: Add new product with product name 'SSD', price 10000, waranty '2027-03-10'
+    Question: Add new product with product name SSD, price 10000, waranty 2027 03 10
     MongoDB Query: collection.updateOne({{"email": {email}}}, {{"$push": {{"productDetails": {{ "product": "SSD", "price": 10000, "waranty": "2027-03-10"}}}}}})
 
     Question: Delete the product 'Smart Watch'
@@ -90,7 +90,13 @@ def mogodb_query_generator(db):
         "image": "$productDetails.image"
     }} }}
   ])
-    
+
+ Question: Update the image of Shoe to red color shoe
+ MongoDB Query: collection.updateOne(
+  {{ "email": {email}, "productDetails.product": "Shoe" }},
+  {{ "$set": {{ "productDetails.$.image": "red color shoe"}}}}
+)
+  
     Note:
 
     - Follow all the above instruction and look the example Question and MongoDB Query before performing actions.

@@ -1,7 +1,11 @@
+
+
+# # mongodb_database.py
 # from pymongo import MongoClient
 # from bson import ObjectId
 # from datetime import datetime
 # import ast
+# from image_tools import search_and_download_image  # Import your image utility
 
 # class MongoDBDatabase:
 #     def __init__(self, uri, db_name):
@@ -29,37 +33,35 @@
 #                 code = query[len("collection.updateOne("):-1]
 #                 args = list(ast.literal_eval(f"[{code}]"))
 
-#                 # Check for $push operation and add ObjectId to new product
 #                 if "$push" in args[1] and "productDetails" in args[1]["$push"]:
 #                     product = args[1]["$push"]["productDetails"]
-                    
-#                     # Add _id if not present
+
 #                     if "_id" not in product:
 #                         product["_id"] = ObjectId()
 
-#                     # Convert waranty to datetime if it's a string
 #                     if "waranty" in product and isinstance(product["waranty"], str):
 #                         try:
 #                             product["waranty"] = datetime.fromisoformat(product["waranty"])
 #                         except ValueError:
 #                             return [{"error": f"Invalid date format for waranty: {product['waranty']}"}]
 
+#                     if "product" in product and not product.get("image"):
+#                         image_name = search_and_download_image(product["product"])
+#                         product["image"] = image_name
+
 #                 result = collection.update_one(*args)
 #                 return [{"matched_count": result.matched_count, "modified_count": result.modified_count}]
-
 #             else:
 #                 return [{"error": "Unsupported operation"}]
 
 #         except Exception as e:
 #             return [{"error": str(e)}]
-
-
-# mongodb_database.py
 from pymongo import MongoClient
 from bson import ObjectId
 from datetime import datetime
 import ast
-from image_tools import search_and_download_image  # Import your image utility
+from image_tools import search_and_download_image  # Your image search module
+
 
 class MongoDBDatabase:
     def __init__(self, uri, db_name):
@@ -87,24 +89,43 @@ class MongoDBDatabase:
                 code = query[len("collection.updateOne("):-1]
                 args = list(ast.literal_eval(f"[{code}]"))
 
-                if "$push" in args[1] and "productDetails" in args[1]["$push"]:
-                    product = args[1]["$push"]["productDetails"]
+                filter_doc = args[0]
+                update_doc = args[1]
 
+                # Handle $push (adding new product)
+                if "$push" in update_doc and "productDetails" in update_doc["$push"]:
+                    product = update_doc["$push"]["productDetails"]
+
+                    # Assign ObjectId if missing
                     if "_id" not in product:
                         product["_id"] = ObjectId()
 
+                    # Convert warranty to datetime
                     if "waranty" in product and isinstance(product["waranty"], str):
                         try:
                             product["waranty"] = datetime.fromisoformat(product["waranty"])
                         except ValueError:
                             return [{"error": f"Invalid date format for waranty: {product['waranty']}"}]
 
-                    if "product" in product and not product.get("image"):
-                        image_name = search_and_download_image(product["product"])
+                    # Search and assign image if missing or a prompt string
+                    if "product" in product and (not product.get("image") or isinstance(product["image"], str)):
+                        image_name = search_and_download_image(product["image"] or product["product"])
                         product["image"] = image_name
 
-                result = collection.update_one(*args)
+                # Handle $set (updating productDetails)
+                if "$set" in update_doc:
+                    set_doc = update_doc["$set"]
+                    for key, value in set_doc.items():
+                        # Match keys like 'productDetails.$.image'
+                        if key.startswith("productDetails") and key.endswith(".image") and isinstance(value, str):
+                            image_prompt = value.strip()
+                            if image_prompt:
+                                image_name = search_and_download_image(image_prompt)
+                                update_doc["$set"][key] = image_name
+
+                result = collection.update_one(filter_doc, update_doc)
                 return [{"matched_count": result.matched_count, "modified_count": result.modified_count}]
+
             else:
                 return [{"error": "Unsupported operation"}]
 

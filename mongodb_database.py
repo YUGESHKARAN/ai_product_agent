@@ -39,11 +39,11 @@
 #                     if "_id" not in product:
 #                         product["_id"] = ObjectId()
 
-#                     if "waranty" in product and isinstance(product["waranty"], str):
+#                     if "warranty" in product and isinstance(product["warranty"], str):
 #                         try:
-#                             product["waranty"] = datetime.fromisoformat(product["waranty"])
+#                             product["warranty"] = datetime.fromisoformat(product["warranty"])
 #                         except ValueError:
-#                             return [{"error": f"Invalid date format for waranty: {product['waranty']}"}]
+#                             return [{"error": f"Invalid date format for warranty: {product['warranty']}"}]
 
 #                     if "product" in product and not product.get("image"):
 #                         image_name = search_and_download_image(product["product"])
@@ -102,11 +102,11 @@ class MongoDBDatabase:
                         product["_id"] = ObjectId()
 
                     # Convert warranty to datetime
-                    if "waranty" in product and isinstance(product["waranty"], str):
+                    if "warranty" in product and isinstance(product["warranty"], str):
                         try:
-                            product["waranty"] = datetime.fromisoformat(product["waranty"])
+                            product["warranty"] = datetime.fromisoformat(product["warranty"])
                         except ValueError:
-                            return [{"error": f"Invalid date format for waranty: {product['waranty']}"}]
+                            return [{"error": f"Invalid date format for warranty: {product['warranty']}"}]
 
                     # Search and assign image if missing or a prompt string
                     # if "product" in product and (not product.get("image") or isinstance(product["image"], str)):

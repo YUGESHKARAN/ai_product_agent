@@ -55,17 +55,17 @@ def mogodb_query_generator(db):
     Question: price of product Laptop?
     MongoDB Query: collection.find({{"email": {email}, "productDetails.product": "Laptop"}}, {{"productDetails.$": 1, "_id": 0}})
 
-    Question: Change the price of the product Laptop?
-    MongoDB Query: collection.updateOne({{"email": {email}, "productDetails.product": "Laptop"}}, {{"$set": {{"productDetails.$.price": <new_price>}}}})
+    Question: Change the price of the product Laptop to 200000
+    MongoDB Query: collection.updateOne({{"email": {email}, "productDetails.product": "Laptop"}}, {{"$set": {{"productDetails.$.price": 200000}}}})
 
-    Question: Add new product with product name SSD, price 10000, warranty March 10, 2027
+    Question: Add new product SSD, price 10000, warranty March 10, 2027
     MongoDB Query: collection.updateOne({{"email": {email}}}, {{"$push": {{"productDetails": {{ "product": "SSD", "price": 10000, "waranty": "2027-03-10"}}}}}})
 
     Question: Delete the product 'Smart Watch'
-    MongoDB Query: collection.updateOne({{ "email": {email} }},{{ "$pull": {{ "productDetails": {{ "product": "Smart Watch" }}}}}})
+    MongoDB Query: collection.updateOne({{ "email": {email}}},{{ "$pull": {{ "productDetails": {{ "product": "Smart Watch" }}}}}})
 
     Question: Show the expensive product.
-    MongoDB Query: collection.aggregate([{{ "$match": {{ "email": {email} }} }},
+    MongoDB Query: collection.aggregate([{{ "$match": {{ "email": {email}}} }},
     {{ "$unwind": "$productDetails" }},
     {{ "$sort": {{ "productDetails.price": -1 }} }},
     {{ "$limit": 1 }},
@@ -101,13 +101,9 @@ def mogodb_query_generator(db):
   
     Note:
 
-    - Follow all the above instruction and look the example Question and MongoDB Query before performing actions.
     - Make sure to do update operation or insert operation only on productDetails field.
     - Do not use any other field except productDetails and email.
-    - For insert operation image will be added in backend, do not get the image from the user for adding new product.
-
-
-
+    - Follow all the above instruction and look the example Question and MongoDB Query before performing actions.
 
 
     Your turn:
@@ -117,6 +113,7 @@ def mogodb_query_generator(db):
 
     prompt = ChatPromptTemplate.from_template(template).partial(email="{email}")
     llm = ChatGroq(model_name="llama3-70b-8192")
+    # llm = ChatGroq(model_name="llama-3.3-70b-versatile")
 
 
     return (
@@ -138,7 +135,6 @@ def response_generator(user_query: str, db: MongoDBDatabase,email: str, chat_his
     note:
     1. Generate the content as per the conversation history and MongoDB response.
     2. Make sure to format the response as paragraph.
-    3. Make sure to avoid including document query structure in the response format, including errors. 
     4. Try to as pre-size by avoiding adding other stuffs like document query structure.
     5. Do not genearte the response more than 40 words.
 
@@ -150,12 +146,12 @@ def response_generator(user_query: str, db: MongoDBDatabase,email: str, chat_his
     User email: {email}
     MongoDB Response: {response}
 
-    If the MongoDB response is not empty, confirm the existence of the post and author and show the post content.
-    If the MongoDB response is empty, inform the user that the post wasn't found or suggest alternative searches.
+    If the MongoDB response is not empty, confirm the existence of the product details.
     """
 
 
     llm = ChatGroq(model_name="llama3-70b-8192")
+    # llm = ChatGroq(model_name="llama-3.3-70b-versatile")
 
     # Create the prompt with the template
     prompt = ChatPromptTemplate.from_template(template)

@@ -59,7 +59,7 @@ def mogodb_query_generator(db):
     MongoDB Query: collection.updateOne({{"email": {email}, "productDetails.product": "Laptop"}}, {{"$set": {{"productDetails.$.price": 200000}}}})
 
     Question: Add new product SSD, price 10000, warranty March 10, 2027
-    MongoDB Query: collection.updateOne({{"email": {email}}}, {{"$push": {{"productDetails": {{ "product": "SSD", "price": 10000, "waranty": "2027-03-10"}}}}}})
+    MongoDB Query: collection.updateOne({{"email": "{email}"}}, {{"$push": {{"productDetails": {{ "product": "SSD", "price": 10000, "waranty": "2027-03-10"}}}}}})
 
     Question: Delete the product 'Smart Watch'
     MongoDB Query: collection.updateOne({{ "email": {email}}},{{ "$pull": {{ "productDetails": {{ "product": "Smart Watch" }}}}}})
@@ -102,6 +102,7 @@ def mogodb_query_generator(db):
     Note:
 
     - Make sure to do update operation or insert operation only on productDetails field.
+    - For adding new product only to productDetails array.
     - Do not use any other field except productDetails and email.
     - Follow all the above instruction and look the example Question and MongoDB Query before performing actions.
 

@@ -61,7 +61,7 @@ from pymongo import MongoClient
 from bson import ObjectId
 from datetime import datetime
 import ast
-from image_tools import search_and_download_image  # Your image search module
+from image_tools2 import search_and_download_image  # Your image search module
 
 
 class MongoDBDatabase:

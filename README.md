@@ -82,14 +82,14 @@ flask-ai/
 3. **Configure environment:**
    - Create a `.env` file in `flask-ai/`:
      ```
-     CHAT_GROQ_API= groq_api_key   # To access the model llama3-70b
+     GROQ_API_KEY= groq_api_key   # To access the model llama3-70b
      SERPAPI_KEY=your_serpapi_key        # Optional, for SerpAPI image generation
      UNSPLASH_ACCESS_KEY=your_unsplash_key  # Optional, for Unsplash image generation
      AWS_ACCESS_KEY_ID=your_aws_access_key_id      # Required, for S3 image storage
      AWS_SECRET_ACCESS_KEY=your_aws_secret_access_key  # Required, for S3 image storage
      AWS_S3_BUCKET_NAME=your_bucket_name           # Required, for S3 image storage
      ```
-   - (Adjust `MODEL_PATH`, API keys, and AWS S3 credentials as needed for your environment.)
+   - (Adjust `GROQ_API_KEY`, API keys, and AWS S3 credentials as needed for your environment.)
 
 ### Running the Server
 

@@ -1,12 +1,12 @@
 # AI Product Agent – Python Backend
 
-Welcome to the Python backend for **AI Product Agent**! This service delivers advanced AI-driven analysis and automation for your product management platform, integrating seamlessly as the intelligence layer of your MERN stack application. Which is integrated on the application [product_agent_node](https://github.com/YUGESHKARAN/product_agent_node.git).
+Welcome to the Python backend for **AI Product Agent**! This service delivers advanced AI-driven analysis and automation for your product management platform, integrating seamlessly as the intelligent backend.
 
 ---
 
 ## 🚀 Overview
 
-This backend is built with **Flask** and leverages state-of-the-art LLMs (e.g., Llama 3 70B) to provide intelligent analysis and automation capabilities. It exposes RESTful APIs consumed by the main product website, enhancing CRUD workflows with AI-powered insights.
+This backend is built with **Flask** and leverages state-of-the-art LLMs (e.g., Llama 3 70B) to provide intelligent analysis and automation capabilities. It exposes RESTful APIs consumed by the main application.
 
 ---
 
@@ -25,6 +25,7 @@ This backend is built with **Flask** and leverages state-of-the-art LLMs (e.g., 
     from image_tools2 import search_and_download_image
     ```
     to select either method based on your preferences and API accessibility.
+- **Automatic AWS S3 Storage:** Downloaded images are automatically stored in your configured AWS S3 bucket. Ensure you provide your AWS S3 access keys for proper configuration.
 
 ---
 
@@ -63,6 +64,7 @@ flask-ai/
 - Llama 3 70B or compatible model weights
 - [SerpAPI Key](https://serpapi.com/manage-api-key) (for SerpAPI image generation)
 - [Unsplash Access Key](https://unsplash.com/developers) (for Unsplash image generation)
+- **AWS S3 credentials (for storing images in S3)**
 
 ### Installation
 
@@ -83,8 +85,11 @@ flask-ai/
      MODEL_PATH=/absolute/path/to/llama3-70b
      SERPAPI_KEY=your_serpapi_key        # Optional, for SerpAPI image generation
      UNSPLASH_ACCESS_KEY=your_unsplash_key  # Optional, for Unsplash image generation
+     AWS_ACCESS_KEY_ID=your_aws_access_key_id      # Required, for S3 image storage
+     AWS_SECRET_ACCESS_KEY=your_aws_secret_access_key  # Required, for S3 image storage
+     AWS_S3_BUCKET_NAME=your_bucket_name           # Required, for S3 image storage
      ```
-   - (Adjust `MODEL_PATH` and API keys as needed for your environment.)
+   - (Adjust `MODEL_PATH`, API keys, and AWS S3 credentials as needed for your environment.)
 
 ### Running the Server
 
@@ -106,6 +111,7 @@ python app.py
   - **SerpAPI:** Utilizes `image_tools.py`—requires `SERPAPI_KEY`.
   - **Unsplash:** Utilizes `image_tools2.py`—requires `UNSPLASH_ACCESS_KEY`.
 - To select your preferred backend, modify the import in `mongodb_database.py` as described above.
+- Downloaded images will be stored in your configured AWS S3 bucket. Ensure your AWS credentials are set in the `.env` file.
 
 ### Example API Usage
 

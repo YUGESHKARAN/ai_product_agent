@@ -1,6 +1,6 @@
 # AI Product Agent – Python Backend
 
-Welcome to the Python backend for **AI Product Agent**! This service delivers advanced AI-driven analysis and automation for your product management platform, integrating seamlessly as the intelligent backend. It is inteh=grated into the application [product_agent_node](https://github.com/YUGESHKARAN/product_agent_node.git).
+Welcome to the Python backend for **AI Product Agent**! This service delivers advanced AI-driven analysis and automation for your product management platform, integrating seamlessly as the intelligent backend. It is integrated into the application [product_agent_node](https://github.com/YUGESHKARAN/product_agent_node.git). Vist [this link](https://www.linkedin.com/posts/yugeshkaran01_techlovers-ai-llm-activity-7337033147668119553-D03r?utm_source=share&utm_medium=member_desktop&rcm=ACoAADkZ8EIBpAY9uNYV2sgO7Npeu1ePnNN6Who)  to view the application demo. 
 
 ---
 

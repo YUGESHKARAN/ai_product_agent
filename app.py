@@ -7,7 +7,8 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.runnables import RunnablePassthrough
 from langchain_core.output_parsers import StrOutputParser
 from mongodb_database import MongoDBDatabase
-from langchain_groq import ChatGroq
+# from langchain_groq import ChatGroq
+from langchain_openai import ChatOpenAI
 import os
 
 
@@ -17,6 +18,7 @@ load_dotenv()
 
 # Set API keys
 os.environ['GROQ_API_KEY'] = os.getenv('GROQ_API_KEY')
+os.environ['OPENAI_API_KEY'] = os.getenv('OPENAI_API_KEY')
 os.environ['MONGODB_URI'] = os.getenv('MONGODB_URI')
 
 
@@ -113,8 +115,9 @@ def mogodb_query_generator(db):
     """
 
     prompt = ChatPromptTemplate.from_template(template).partial(email="{email}")
-    llm = ChatGroq(model_name="llama3-70b-8192")
-    # llm = ChatGroq(model_name="llama-3.3-70b-versatile")
+    # llm = ChatGroq(model_name="llama3-70b-8192")
+    # llm = ChatGroq(model_name="llama3-70b-8192")
+    llm = ChatOpenAI(model_name="gpt-4.1")
 
 
     return (
@@ -151,8 +154,9 @@ def response_generator(user_query: str, db: MongoDBDatabase,email: str, chat_his
     """
 
 
-    llm = ChatGroq(model_name="llama3-70b-8192")
+    # llm = ChatGroq(model_name="llama3-70b-8192")
     # llm = ChatGroq(model_name="llama-3.3-70b-versatile")
+    llm = ChatOpenAI(model_name="gpt-4.1")
 
     # Create the prompt with the template
     prompt = ChatPromptTemplate.from_template(template)

@@ -9,7 +9,7 @@ pymongo
 flask
 flask-cors
 
-langchain_groq
+
 langchain_openai
 boto3
 serpapi

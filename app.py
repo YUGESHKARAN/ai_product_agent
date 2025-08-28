@@ -7,8 +7,8 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.runnables import RunnablePassthrough
 from langchain_core.output_parsers import StrOutputParser
 from mongodb_database import MongoDBDatabase
-# from langchain_groq import ChatGroq
-from langchain_openai import ChatOpenAI
+from langchain_groq import ChatGroq
+# from langchain_openai import ChatOpenAI
 import os
 
 
@@ -19,14 +19,14 @@ load_dotenv()
 # Set API keys
 os.environ['GROQ_API_KEY'] = os.getenv('GROQ_API_KEY')
 os.environ['OPENAI_API_KEY'] = os.getenv('OPENAI_API_KEY')
-os.environ['MONGODB_URI'] = os.getenv('MONGODB_URI')
-
+mongoURI = os.getenv('MONGODB_URI')
+mongoDB_Name = os.getenv('MONGO_DB_NAME') 
 
 app = Flask(__name__)
 
 CORS(app)
 
-db = MongoDBDatabase("mongodb+srv://yugeshkaran01:GEMBkFW5Ny5wi4ox@blog.adtwl.mongodb.net/JWT-AUTH?retryWrites=true&w=majority&appName=User","JWT-AUTH")
+db = MongoDBDatabase(mongoURI,mongoDB_Name)
 
 chat_history = []
 
@@ -117,7 +117,8 @@ def mogodb_query_generator(db):
     prompt = ChatPromptTemplate.from_template(template).partial(email="{email}")
     # llm = ChatGroq(model_name="llama3-70b-8192")
     # llm = ChatGroq(model_name="llama3-70b-8192")
-    llm = ChatOpenAI(model_name="gpt-4.1")
+    # llm = ChatOpenAI(model_name="gpt-4.1")
+    llm = ChatGroq(model_name="llama-3.1-8b-instant")
 
 
     return (
@@ -156,7 +157,8 @@ def response_generator(user_query: str, db: MongoDBDatabase,email: str, chat_his
 
     # llm = ChatGroq(model_name="llama3-70b-8192")
     # llm = ChatGroq(model_name="llama-3.3-70b-versatile")
-    llm = ChatOpenAI(model_name="gpt-4.1")
+    # llm = ChatOpenAI(model_name="gpt-4.1")
+    llm = ChatGroq(model_name="llama-3.1-8b-instant")
 
     # Create the prompt with the template
     prompt = ChatPromptTemplate.from_template(template)

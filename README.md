@@ -1,16 +1,33 @@
-# AI Product Agent – Python Backend
+<p
+  align="center">
+  <img src="assets/product_control_agent.png" width="300" height="300" alt="Cute Llama"> 
+</p>
 
-Welcome to the Python backend for **AI Product Agent**! This service delivers advanced AI-driven analysis and automation for your product management platform, integrating seamlessly as the intelligent backend. It is integrated into the application [product_agent_node](https://github.com/YUGESHKARAN/product_agent_node.git). Vist [this link](https://www.linkedin.com/posts/yugeshkaran01_techlovers-ai-llm-activity-7337033147668119553-D03r?utm_source=share&utm_medium=member_desktop&rcm=ACoAADkZ8EIBpAY9uNYV2sgO7Npeu1ePnNN6Who)  to view the application demo. 
+<div align="center">
+  <h2> Product Control Agent</h2>
+</div>
+<div align="center">
+
+[![License: MIT](https://img.shields.io/github/license/YUGESHKARAN/ai_product_agent)](LICENSE)
+[![GitHub Stars](https://img.shields.io/github/stars/YUGESHKARAN/ai_product_agent?style=social)](https://github.com/YUGESHKARAN/ai_product_agent/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/YUGESHKARAN/ai_product_agent?style=social)](https://github.com/YUGESHKARAN/ai_product_agent/network/members)
+[![Python Version](https://img.shields.io/badge/python-%3E=3.8-brightgreen.svg)](https://python.org/)
+[![Issues](https://img.shields.io/github/issues/YUGESHKARAN/ai_product_agent)](https://github.com/YUGESHKARAN/ai_product_agent/issues)
+[![Pull Requests](https://img.shields.io/github/issues-pr/YUGESHKARAN/ai_product_agent)](https://github.com/YUGESHKARAN/ai_product_agent/pulls)
+[![Last Commit](https://img.shields.io/github/last-commit/YUGESHKARAN/ai_product_agent)](https://github.com/YUGESHKARAN/ai_product_agent/commits/main)
+</div>
+
+Welcome to **AI Product Agent**, A backend micro-service of [Product Control Agent](https://github.com/YUGESHKARAN/product_agent_node.git) App! This service delivers advanced AI-driven analysis and automation for our product management platform. Vist [this link](https://www.linkedin.com/posts/yugeshkaran01_techlovers-ai-llm-activity-7337033147668119553-D03r?utm_source=share&utm_medium=member_desktop&rcm=ACoAADkZ8EIBpAY9uNYV2sgO7Npeu1ePnNN6Who) to view the application demo. 
 
 ---
 
-## 🚀 Overview
+## Overview
 
 This backend is built with **Flask** and leverages state-of-the-art LLMs (e.g., Llama 3 70B) to provide intelligent analysis and automation capabilities. It exposes RESTful APIs consumed by the main application.
 
 ---
 
-## 🔥 Features
+## Features
 
 - **LLM-Powered Analysis:** Integrates Llama 3 70B or similar models for deep data analysis and smart recommendations.
 - **RESTful API:** Clean, documented endpoints for easy integration with Node.js/React frontend and backend.
@@ -29,7 +46,7 @@ This backend is built with **Flask** and leverages state-of-the-art LLMs (e.g., 
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **Backend Framework:** Python 3.8+, Flask
 - **AI Model:** Llama 3 70B (or compatible LLM)
@@ -38,10 +55,11 @@ This backend is built with **Flask** and leverages state-of-the-art LLMs (e.g., 
 
 ---
 
-## 📁 Directory Structure
+## Directory Structure
 
 ```
 flask-ai/
+├── assets                # containing app's display images
 ├── app.py                # Main Flask application
 ├── model/                # Model utilities and loading
 ├── routes/               # API endpoints (analysis, inference, etc.)
@@ -49,13 +67,12 @@ flask-ai/
 ├── image_tools2.py       # Image generation via Unsplash API
 ├── mongodb_database.py   # Database operations (modify import for image backend)
 ├── requirements.txt      # Python dependencies
-├── .env                  # Environment variables (model path, API keys, etc.)
-└── ...
+└── .env                  # secret variables
 ```
 
 ---
 
-## ⚡ Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -80,27 +97,36 @@ flask-ai/
    ```
 
 3. **Configure environment:**
-   - Create a `.env` file in `flask-ai/`:
+   Create a `.env` file in `flask-ai/`:
+   ```env
+
+     # LLM credential
+     GROQ_API_KEY = groq_api_key                # here using llama3-70b model
+
+     # Image API credentails (choose anyone)
+     SERPAPI_KEY = your_serpapi_key             # image generation API
+     UNSPLASH_ACCESS_KEY = your_unsplash_key    # Unsplash image generation API 
+
+     # AWS credentials
+     AWS_ACCESS_KEY_ID = your_aws_access_key_id     
+     AWS_SECRET_ACCESS_KEY=your_aws_secret_access_key 
+     AWS_S3_BUCKET_NAME=your_bucket_name
+
+     # Databse credentail
+     MONGODB_URI = your_mongodb_connection_uri          
      ```
-     GROQ_API_KEY= groq_api_key   # To access the model llama3-70b
-     SERPAPI_KEY=your_serpapi_key        # Optional, for SerpAPI image generation
-     UNSPLASH_ACCESS_KEY=your_unsplash_key  # Optional, for Unsplash image generation
-     AWS_ACCESS_KEY_ID=your_aws_access_key_id      # Required, for S3 image storage
-     AWS_SECRET_ACCESS_KEY=your_aws_secret_access_key  # Required, for S3 image storage
-     AWS_S3_BUCKET_NAME=your_bucket_name           # Required, for S3 image storage
-     ```
-   - (Adjust `GROQ_API_KEY`, API keys, and AWS S3 credentials as needed for your environment.)
+   (Adjust the API keys as needed for your environment.)
 
 ### Running the Server
 
 ```bash
 python app.py
 ```
-- The API will default to `http://localhost:8000` unless otherwise configured.
+- The API will default to `http://localhost:4000` unless otherwise configured.
 
 ---
 
-## 🌐 Usage
+## Usage
 
 - The Flask backend exposes endpoints for AI-powered analysis, inference, and image generation.
 - Integrate with your main backend/frontend via HTTP requests.
@@ -140,14 +166,14 @@ python app.py
 
 ---
 
-## 🛡️ Security
+## Security
 
 - The backend is intended for internal use behind your main application’s authentication layer.
-- Set up firewall rules and/or JWT authentication if exposing to public networks.
+- Set up JWT authentication if exposing to public networks.
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome! Open issues or submit pull requests for improvements, bug fixes, or new features.
 
@@ -157,6 +183,3 @@ Contributions are welcome! Open issues or submit pull requests for improvements,
 
 This project is licensed under the [MIT License](../LICENSE).
 
----
-
-**Empowering your product management with AI-powered analysis, smart automation, and flexible image generation!**

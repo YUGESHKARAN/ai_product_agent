@@ -4,17 +4,18 @@
 </p>
 
 <div align="center">
-  <h2> Product Control Agent</h2>
+  <h3> Product Control Agent</h3>
 </div>
 <div align="center">
 
-[![License: MIT](https://img.shields.io/github/license/YUGESHKARAN/ai_product_agent)](LICENSE)
+[![License: MIT](https://img.shields.io/github/license/YUGESHKARAN/ai_product_agent?cache-bust=1)](LICENSE)
 [![GitHub Stars](https://img.shields.io/github/stars/YUGESHKARAN/ai_product_agent?style=social)](https://github.com/YUGESHKARAN/ai_product_agent/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/YUGESHKARAN/ai_product_agent?style=social)](https://github.com/YUGESHKARAN/ai_product_agent/network/members)
 [![Python Version](https://img.shields.io/badge/python-%3E=3.8-brightgreen.svg)](https://python.org/)
 [![Issues](https://img.shields.io/github/issues/YUGESHKARAN/ai_product_agent)](https://github.com/YUGESHKARAN/ai_product_agent/issues)
 [![Pull Requests](https://img.shields.io/github/issues-pr/YUGESHKARAN/ai_product_agent)](https://github.com/YUGESHKARAN/ai_product_agent/pulls)
 [![Last Commit](https://img.shields.io/github/last-commit/YUGESHKARAN/ai_product_agent)](https://github.com/YUGESHKARAN/ai_product_agent/commits/main)
+
 </div>
 
 Welcome to **AI Product Agent**, A backend micro-service of [Product Control Agent](https://github.com/YUGESHKARAN/product_agent_node.git) App! This service delivers advanced AI-driven analysis and automation for our product management platform. Vist [this link](https://www.linkedin.com/posts/yugeshkaran01_techlovers-ai-llm-activity-7337033147668119553-D03r?utm_source=share&utm_medium=member_desktop&rcm=ACoAADkZ8EIBpAY9uNYV2sgO7Npeu1ePnNN6Who) to view the application demo. 

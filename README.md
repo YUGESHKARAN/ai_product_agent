@@ -140,30 +140,35 @@ python app.py
 - To select your preferred backend, modify the import in `mongodb_database.py` as described above.
 - Downloaded images will be stored in your configured AWS S3 bucket. Ensure your AWS credentials are set in the `.env` file.
 
-### Example API Usage
+### API Usage
 
-- **Analysis Endpoint:**
+- **Welcome Message:**
   ```
-  POST /analyze
+  GET http://127.0.0.1:4000/
   {
-    "product_data": {...}
+    "Message" : ""Welcome to Product Agent""
   }
   ```
-  Response:
+
+
+- **Perfom Operations:**
+   POST request http://127.0.0.1:4000/query-agent
+  
   ```json
   {
-    "analysis": "LLM-powered insights here."
+  "query":"which is the most expensive product",
+  "email": "test1@gmail.com"
   }
-  ```
 
-- **Image Generation (Example):**
   ```
-  POST /generate-image
+  POST respone
+  ```json  
+
   {
-    "prompt": "modern workspace"
+  "response": "The most expensive product is the Laptop, priced at $60,000. I can confirm that the product details for the Laptop exist in your database."
   }
+  
   ```
-  Response (URL or image data, depending on backend and implementation).
 
 ---
 

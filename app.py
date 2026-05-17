@@ -183,7 +183,7 @@ def response_generator(user_query: str, db: MongoDBDatabase,email: str, chat_his
 
 @app.route("/")
 def welcome_blog_backend():
-    return "Welcome to Product Agent"
+    return jsonify({"message":"Welcome to Product Agent"}), 200
 
 @app.route("/query-agent",methods=['POST'])
 def query_MongoDB_RAG():

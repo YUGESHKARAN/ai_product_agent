@@ -118,7 +118,8 @@ def mogodb_query_generator(db):
     # llm = ChatGroq(model_name="llama3-70b-8192")
     # llm = ChatGroq(model_name="llama3-70b-8192")
     # llm = ChatOpenAI(model_name="gpt-4.1")
-    llm = ChatGroq(model_name="llama-3.1-8b-instant")
+    # llm = ChatGroq(model_name="llama-3.1-8b-instant")
+    llm = ChatGroq(model_name="openai/gpt-oss-20b")
 
 
     return (
